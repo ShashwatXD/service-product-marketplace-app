@@ -43,13 +43,12 @@ void main() async {
   // await appConfigDataHandler.init();
   //Release(PrioritizeCache(), 'assets/digia_assets/app_config.json', 'assets/digia_assets/js_function.js')
   await DigiaUIClient.init(
-  accessKey: "67ab17ed3da4ddfcd6cfea51",
-  flavorInfo: Debug("main"),
-  environment: Environment.development.name,
-  baseUrl: "https://app.digia.tech/api/v1",
-  networkConfiguration:
-  NetworkConfiguration(defaultHeaders:  {}, timeout: 1000));
-
+      accessKey: "67ab17ed3da4ddfcd6cfea51",
+      flavorInfo: Debug("shashwat/shareQR"),
+      environment: Environment.development.name,
+      baseUrl: "https://app.digia.tech/api/v1",
+      networkConfiguration:
+          NetworkConfiguration(defaultHeaders: {}, timeout: 1000));
 
   await PreferenceUtils.init();
   String environment = String.fromEnvironment(
@@ -61,7 +60,8 @@ void main() async {
   DUIFactory().initialize();
 
   runApp(
-    DigiaUIScope(child:   MultiBlocProvider(
+    DigiaUIScope(
+        child: MultiBlocProvider(
       providers: [
         BlocProvider<StandardScreenResponseCubit>(
           create: (context) => StandardScreenResponseCubit(),
@@ -119,16 +119,19 @@ class _LokalAppState extends State<LokalApp> with DigiaMessageHandlerMixin {
     initPlatformState();
     shakeInit();
     addMessageHandler(DigiaMessageType.logout.name, DigiaMessageHandler.logout);
-    addMessageHandler(DigiaMessageType.openPage.name, DigiaMessageHandler.openPage);
-    addMessageHandler(DigiaMessageType.executeAction.name, DigiaMessageHandler.executeAction);;
+    addMessageHandler(
+        DigiaMessageType.openPage.name, DigiaMessageHandler.openPage);
+    addMessageHandler(
+        DigiaMessageType.executeAction.name, DigiaMessageHandler.executeAction);
+        addMessageHandler(
+        DigiaMessageType.shareQR.name, DigiaMessageHandler.shareQR);
+    
   }
-
 
   void resetState() {
     setState(() {});
     initPlatformState();
   }
-
 
   @override
   void dispose() {

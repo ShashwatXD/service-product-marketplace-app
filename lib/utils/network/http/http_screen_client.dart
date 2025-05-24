@@ -241,6 +241,7 @@ class HttpScreenClient {
     try {
       bool hasConnection = await InternetConnectionChecker().hasConnection;
       String routes = pageRoute.replaceAll('/', '_');
+      print("PageRoute=======: $pageRoute");
       Event event =
           Event.build(name: "Api_Called_$routes", apiEndPoint: pageRoute);
       if (!hasConnection) {
@@ -264,6 +265,7 @@ class HttpScreenClient {
           .timeout(Duration(seconds: NetworkUtils.REQUEST_TIMEOUT));
 
       if (response.statusCode == NetworkUtils.HTTP_SUCCESS) {
+        print("Response body------------: ${response.body}");
         ApiResponse apiResponse =
             ApiResponse.fromJson(jsonDecode(response.body));
         if (apiResponse.isSuccess!) {

@@ -77,7 +77,7 @@ class ApiRepository {
   }
 
   static Future<ApiResponse> apiCallerScreen(String apiRoute,
-      Map<String, dynamic> args) {
+               Map<String, dynamic> args) {
     return HttpScreenClient.getApiResponse(apiRoute, args);
   }
 
@@ -498,7 +498,8 @@ class ApiRepository {
   }
 
   static Future<ApiResponse> initiatePaymentResume(args) {
-    return HttpScreenClient.getApiResponse(ApiRoutes.initiatePaymentResume, args);
+    return HttpScreenClient.getApiResponse(
+        ApiRoutes.initiatePaymentResume, args);
   }
 
   static Future<ApiResponse> verifyPaymentResume(args) {

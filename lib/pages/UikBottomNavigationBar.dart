@@ -61,7 +61,8 @@ class _UikBottomNavigationBarState extends State<UikBottomNavigationBar> {
 
     if(!UserDataHandler.getUserToken().isEmpty){
       //Update headers with Digia
-      DUIAppState().update<String>('bearerToken', UserDataHandler.getUserToken());
+      DUIAppState()
+          .update<String>('bearerToken', UserDataHandler.getUserToken());
     }
 
     Future.delayed(
@@ -183,7 +184,7 @@ class _UikBottomNavigationBarState extends State<UikBottomNavigationBar> {
     return MaterialApp(
       home: Scaffold(
         body: DUIFactory().createPage(
-            'homepage',{}),
+          'shareqr',{}),
         bottomNavigationBar: BottomAppBar(
           elevation: 0.0, // Remove shadow
           child: Row(
@@ -196,7 +197,7 @@ class _UikBottomNavigationBarState extends State<UikBottomNavigationBar> {
 
               buildNavItem(
                   Icons.person_outline_sharp, 'Account', 2, accountkey),
-             // buildNavItem(Icons.menu_book, 'Academy', 1, menukey),
+              // buildNavItem(Icons.menu_book, 'Academy', 1, menukey),
               // buildNavItem(Icons.payment, 'ExtraPe', 3),
               // Add more items as needed
             ],
@@ -232,9 +233,6 @@ class _UikBottomNavigationBarState extends State<UikBottomNavigationBar> {
     );
   }
 }
-
-
-
 class BottomCartDetails extends StatelessWidget {
   const BottomCartDetails({
     super.key,

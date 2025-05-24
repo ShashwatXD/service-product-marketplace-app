@@ -11,6 +11,7 @@ enum DigiaMessageType {
   logout,
   openPage,
   executeAction,
+  shareQR,
 }
 
 extension DigiaMessageTypeExtension on DigiaMessageType {
@@ -22,10 +23,16 @@ extension DigiaMessageTypeExtension on DigiaMessageType {
         return 'openPage';
       case DigiaMessageType.executeAction:
         return 'executeAction';
+        
+      case DigiaMessageType.shareQR:
+        return 'shareQR';
+
+        
     }
   }
 }
 
+ 
 
 abstract class DigiaMessageHandler {
   static void logout(Message message) async {
@@ -40,13 +47,36 @@ abstract class DigiaMessageHandler {
   static void openPage(Message message) {
     final context = message.getMountedContext();
     final payload = message.payload;
+    print("payload:_______________ $payload");
 
-    if (context != null && payload is Map && payload['pageDeeplinkUrl'] is String) {
+    if (payload is Map && payload['pageDeeplinkUrl'] is String) {
       openPageFromUrl(context, payload['pageDeeplinkUrl']);
     } else {
       print("Invalid or missing 'url' in message payload.");
     }
   }
+
+ static void shareQR(Message message) {
+  final payload = message.payload;
+  print("payload:_______________ $payload");
+
+  String? qrLink;
+
+  if (payload is Map&&payload['lokalQR'] != null) {
+      qrLink = payload['lokalQR'];
+  
+    print("Sharing QR Link: $qrLink");
+    UiUtils.shareOnWhatsApp(
+      qrLink!,
+      "Check out this Lokal QR code: $qrLink",
+    );
+  } else {
+    print("Invalid or missing QR link in payload.");
+  }
+  }
+
+
+
 
 
   static void openPageFromUrl(BuildContext? context, String url) async {
